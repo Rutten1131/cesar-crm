@@ -24,24 +24,26 @@ export class PdfDocumentService {
             const fs = await import('fs');
             const publicPath = path.join(process.cwd(), 'public');
 
-            const getAssetPath = (assetName: string) => {
+            const getAssetBase64 = (assetName: string) => {
                 const fullPath = path.join(publicPath, assetName);
                 if (fs.existsSync(fullPath)) {
-                    return fullPath;
+                    const imageBuffer = fs.readFileSync(fullPath);
+                    const extension = path.extname(assetName).substring(1);
+                    return `data:image/${extension};base64,${imageBuffer.toString('base64')}`;
                 }
                 return undefined;
             };
 
-            const defaultLogo = getAssetPath('logo-membrete.png');
-            const defaultFooter = getAssetPath('pie-pagina.png');
+            const defaultLogo = getAssetBase64('logo-membrete.png');
+            const defaultFooter = getAssetBase64('pie-pagina.png');
 
             const docElement = React.createElement(UniversalPdfDocument, {
                 content,
                 logoUrl: options.logoUrl || defaultLogo,
                 footerUrl: options.footerUrl || defaultFooter,
-                showSignatureLines: type === 'contract',
-                signerName: options.signerName,
-                clientName: options.clientName
+                showSignatureLines: type === 'contract' || type === 'quotation',
+                signerName: options.signerName || 'Ing. César Reyes Jaramillo',
+                clientName: options.clientName || 'EL CLIENTE'
             });
 
             // renderToBuffer es específico de Node.js
