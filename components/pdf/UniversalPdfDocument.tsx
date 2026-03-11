@@ -176,8 +176,8 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
         }
 
         if (line === '---') {
-            // Render as a page break to make proposals multi-page and professional
-            elements.push(<View key={`break-${i}`} break />);
+            // Render as a simple visual divider instead of a page break
+            elements.push(<View key={`break-${i}`} style={styles.divider} />);
             continue;
         }
 
