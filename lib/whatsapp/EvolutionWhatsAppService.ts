@@ -9,21 +9,15 @@ export class EvolutionWhatsAppService {
         };
     }
 
-    /**
-     * Formats phone number for Evolution API
-     * Evolution API expects: 593963410409@s.whatsapp.net
-     */
-    private formatNumber(phone: string): string {
-        const clean = phone.replace(/\D/g, '');
-        return `${clean}@s.whatsapp.net`;
-    }
-
     async sendMessage(phone: string, text: string) {
         const { apiUrl, apiKey, instance } = this.getCredentials();
         const url = `${apiUrl}/message/sendText/${instance}`;
 
+        // Send just the plain number, Evolution handles the format
+        const cleanNumber = phone.replace(/\D/g, '');
+
         const payload = {
-            number: this.formatNumber(phone),
+            number: cleanNumber,
             options: {
                 delay: 1200,
                 presence: "composing",
@@ -52,21 +46,29 @@ export class EvolutionWhatsAppService {
     async sendDocument(phone: string, buffer: Buffer, fileName: string, caption?: string) {
         const { apiUrl, apiKey, instance } = this.getCredentials();
         const url = `${apiUrl}/message/sendMedia/${instance}`;
-        const formattedNumber = this.formatNumber(phone);
+        const cleanNumber = phone.replace(/\D/g, '');
+
+        // Evolution API needs the data URI scheme for base64
+        const mediaBase64 = `data:application/pdf;base64,${buffer.toString('base64')}`;
 
         const payload = {
-            number: formattedNumber,
+            number: cleanNumber,
+            options: {
+                delay: 1200,
+                presence: "composing"
+            },
             mediaMessage: {
                 mediatype: "document",
                 caption: caption || "",
-                media: buffer.toString('base64'),
+                media: mediaBase64,
                 fileName: fileName
             }
         };
 
-        console.log(`📤 [EvolutionAPI] Sending document to ${formattedNumber} via ${url}`);
+        console.log(`📤 [EvolutionAPI] Sending PDF to ${cleanNumber}`);
 
         try {
+            // Disable timeout and limits for large PDFs
             const response = await axios.post(url, payload, {
                 headers: {
                     'apikey': apiKey,
@@ -75,11 +77,12 @@ export class EvolutionWhatsAppService {
                 maxBodyLength: Infinity,
                 maxContentLength: Infinity
             });
-            console.log(`✅ [EvolutionAPI] Document sent successfully`);
+            console.log(`✅ [EvolutionAPI] Document sent successfully!`);
             return { success: true, data: response.data };
         } catch (error: any) {
             const errData = error.response?.data || error.message;
-            console.error('❌ [EvolutionAPI] sendDocument Error:', JSON.stringify(errData));
+            console.error('❌ [EvolutionAPI] sendDocument 400 Error:', JSON.stringify(errData));
+            // Return raw error so we can read it in logs
             return { success: false, error: typeof errData === 'string' ? errData : JSON.stringify(errData) };
         }
     }

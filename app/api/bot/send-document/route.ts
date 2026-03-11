@@ -78,7 +78,11 @@ export async function POST(request: Request) {
         const fileName = body.title ? `${body.title.replace(/[^a-z0-9]/gi, '_')}.pdf` : 'Documento.pdf';
 
         const { messagingService } = await import('@/lib/messaging/MessagingService');
-        const sendResult = await messagingService.sendDocument(body.phone, pdfBuffer, fileName, messageText, {
+        
+        // Telegram uses Chat ID, WhatsApp uses Phone Number
+        const destination = platform === 'telegram' ? (process.env.TELEGRAM_CHAT_ID || body.phone) : body.phone;
+
+        const sendResult = await messagingService.sendDocument(destination, pdfBuffer, fileName, messageText, {
             platform,
             source: 'donna_bot_document'
         });
