@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { pdfDocumentService } from '@/lib/donna/services/PdfDocumentService';
 
+export const dynamic = 'force-dynamic';
+
 // Sample Markdown content testing the new layout improvements
 const sampleMarkdown = `
 # Propuesta de Estrategia Digital 2026

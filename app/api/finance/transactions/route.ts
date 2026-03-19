@@ -102,6 +102,11 @@ export async function POST(req: Request) {
             subType: newTransaction.sub_type,
             parentTransactionId: newTransaction.parent_transaction_id,
             notes: newTransaction.notes,
+            intentosCobro: newTransaction.intentos_cobro,
+            proximoRecordatorio: newTransaction.proximo_recordatorio,
+            estadoCobro: newTransaction.estado_cobro,
+            numeroWhatsapp: newTransaction.numero_whatsapp,
+            logCobranza: newTransaction.log_cobranza,
             createdAt: newTransaction.created_at
         };
 
@@ -157,6 +162,11 @@ export async function GET(req: Request) {
             subType: t.sub_type,
             parentTransactionId: t.parent_transaction_id,
             notes: t.notes,
+            intentosCobro: t.intentos_cobro,
+            proximoRecordatorio: t.proximo_recordatorio,
+            estadoCobro: t.estado_cobro,
+            numeroWhatsapp: t.numero_whatsapp,
+            logCobranza: t.log_cobranza,
             createdAt: t.created_at
         })) || [];
 

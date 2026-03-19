@@ -134,3 +134,46 @@ export interface Task {
     relatedClientId?: string;
     relatedLeadId?: string;
 }
+
+export interface Quotation {
+    id: string;
+    leadId?: string;
+    contactId?: string;
+    title: string;
+    status: 'draft' | 'sent' | 'approved' | 'rejected';
+    totalAmount?: number;
+    
+    // Follow-up
+    fechaPrimerContacto?: string;
+    proximoSeguimiento?: string;
+    intentosRealizados: number;
+    estadoSeguimiento: 'PENDIENTE' | 'ENVIADO' | 'EN_SEGUIMIENTO' | 'RESPONDIDO' | 'CERRADO';
+    numeroWhatsapp?: string;
+    notasSeguimiento?: string;
+    
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface Transaction {
+    id: string;
+    type: 'INCOME' | 'EXPENSE';
+    category: string;
+    description: string;
+    amount: number;
+    date: string;
+    dueDate?: string;
+    status: 'PENDING' | 'PAID' | 'OVERDUE' | 'CANCELLED';
+    clientId?: string;
+    leadId?: string;
+    
+    // Collection
+    intentosCobro: number;
+    proximoRecordatorio?: string;
+    estadoCobro: 'PENDIENTE' | 'EN_GESTION' | 'PAGADO' | 'INCOBRABLE';
+    numeroWhatsapp?: string;
+    logCobranza?: string;
+    
+    createdAt: string;
+    updatedAt: string;
+}

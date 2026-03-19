@@ -1,0 +1,178 @@
+﻿  Ôû▓ Next.js 14.2.16
+  - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+   Generating static pages (0/88) ...
+   Generating static pages (22/88) 
+­ƒÜÇ API Migration: Donna v2.0...
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42701',
+  message: 'column "message_timestamp" of relation "donna_chat_messages" already exists, skipping',
+  file: 'tablecmds.c',
+  line: '7471',
+  routine: 'check_for_column_name_collision'
+}
+Ô£à Column added.
+   Generating static pages (44/88) 
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42P07',
+  message: 'relation "idx_message_timestamp" already exists, skipping',
+  file: 'index.c',
+  line: '889',
+  routine: 'index_create'
+}
+Ô£à Index created.
+node.exe : Error fetching stats: Q [Error]: Failed query: select count(*) from "prospects" where 
+"prospects"."whatsapp_sent_at" >= $1
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\Smart\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo              : NotSpecifi    ed: (Error fetchin    g ..._sent_at" >=     $1:String) [], Rem    
+oteException
+    + FullyQualifiedEr    rorId : NativeComm    andError
+ 
+params: 1773896400
+    at ex.queryWithCache (D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:36640)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:39223
+    at async d (D:\Abel paginas\CRM cesar\CRM V2\.next\server\app\api\prospects\stats\route.js:1:1197)
+    at async D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37010
+    at async eC.execute (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:27552)
+    at async eC.handle (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:38344)
+    at async exportAppRoute (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\export\routes\app-route.js:77:26)
+    at async exportPageImpl (D:\Abel paginas\CRM cesar\CRM V2\node_modules\next\dist\export\worker.js:175:20)
+    at async Span.traceAsyncFn (D:\Abel paginas\CRM cesar\CRM V2\node_modules\next\dist\trace\trace.js:154:20) {
+  query: 'select count(*) from "prospects" where "prospects"."whatsapp_sent_at" >= $1',
+  params: [ 1773896400 ],
+  cause: TypeError [ERR_INVALID_ARG_TYPE]: The "string" argument must be of type string or an instance of Buffer 
+or ArrayBuffer. Received type number (1773896400)
+      at Buffer.byteLength (node:buffer:787:11)
+      at Function.str (D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:64096)
+      at D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:67356
+      at Array.forEach (<anonymous>)
+      at D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:67227
+      at ej (D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:8:67400)
+      at V (D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:11:1480)
+      at D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:11:3344
+      at TLSSocket.eL (D:\Abel paginas\CRM cesar\CRM V2\.next\server\chunks\4100.js:11:3349)
+      at TLSSocket.emit (node:events:508:28) {
+    code: 'ERR_INVALID_ARG_TYPE'
+  }
+}
+­ƒÜÇ [API/Chats] Messages found with platform=whatsapp: 14
+ÔØî Test Error: B [Error]: Dynamic server usage: Route /api/test-cortex couldn't be rendered statically because 
+it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at V (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:21777)
+    at Object.get (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:29137)
+    at n (D:\Abel paginas\CRM cesar\CRM V2\.next\server\app\api\test-cortex\route.js:1:1974)
+    at D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37016
+    at D:\Abel paginas\CRM cesar\CRM V2\node_modules\next\dist\server\lib\trace\tracer.js:140:36
+    at NoopContextManager.with (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:7062)
+    at ContextAPI.with (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:518)
+    at NoopTracer.startActiveSpan (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:18093)
+    at ProxyTracer.startActiveSpan (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:18854)
+    at D:\Abel paginas\CRM cesar\CRM V2\node_modules\next\dist\server\lib\trace\tracer.js:122:103 {
+  description: "Route /api/test-cortex couldn't be rendered statically because it used `request.url`. See more 
+info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+   Generating static pages (66/88) 
+ReferenceError: Link is not defined
+    at k (D:\Abel paginas\CRM cesar\CRM V2\.next\server\app\cotizaciones\page.js:8:1971)
+    at nj (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:46251)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47571)
+    at nN (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:64546)
+    at nI (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47010)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47717)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:61546)
+    at nN (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:64546)
+    at nB (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:67538)
+    at nD (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:66680) {
+  digest: '2036340383'
+}
+
+Error occurred prerendering page "/cotizaciones". Read more: https://nextjs.org/docs/messages/prerender-error
+
+ReferenceError: Link is not defined
+    at k (D:\Abel paginas\CRM cesar\CRM V2\.next\server\app\cotizaciones\page.js:8:1971)
+    at nj (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:46251)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47571)
+    at nN (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:64546)
+    at nI (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47010)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:47717)
+    at nM (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:61546)
+    at nN (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:64546)
+    at nB (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:67538)
+    at nD (D:\Abel paginas\CRM cesar\CRM 
+V2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:66680)
+ Ô£ô Generating static pages (88/88)
+
+> Export encountered errors on following paths:
+	/cotizaciones/page: /cotizaciones

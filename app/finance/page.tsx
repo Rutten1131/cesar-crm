@@ -12,12 +12,14 @@ import { HealthSemaphore } from "@/components/finance/health-semaphore"
 import { ForecastChart } from "@/components/finance/forecast-chart"
 import { BreakEvenCard } from "@/components/finance/break-even-card"
 import { format, isBefore, addDays, isSameDay, startOfMonth, endOfMonth, isWithinInterval, subDays } from "date-fns"
+import { es } from "date-fns/locale"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
-import { CalendarDays, FilterX } from "lucide-react"
+import { CalendarDays, FilterX, MessageCircle, CheckCircle2 } from "lucide-react"
+import { Transaction } from "@/lib/types"
 
 interface Metrics {
     cashFlow: number
@@ -35,17 +37,7 @@ interface Metrics {
     margin: number
 }
 
-interface Transaction {
-    id: string
-    type: "INCOME" | "EXPENSE"
-    category: string
-    description: string
-    amount: number
-    date: string
-    dueDate?: string
-    status: "PENDING" | "PAID" | "OVERDUE"
-    client_id?: string
-}
+// Using Transaction from @/lib/types
 
 type FilterType = 'all' | 'today' | 'yesterday' | 'month' | 'custom'
 
@@ -116,6 +108,26 @@ export default function FinancePage() {
         }
         return true // 'all'
     })
+
+    const handleConfirmPayment = async (id: string) => {
+        if (!confirm("¿Confirmar que este pago ha sido recibido?")) return;
+        try {
+            const res = await fetch(`/api/finance/transactions/${id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'PAID', estadoCobro: 'PAGADO' })
+            });
+            if (res.ok) fetchData();
+        } catch (error) {
+            console.error("Error confirming payment:", error);
+        }
+    }
+
+    const handleWhatsAppReminder = (tx: Transaction) => {
+        const phone = tx.numeroWhatsapp?.replace(/\D/g, '') || '';
+        const message = `Hola, te saludo de Objetivo. Recordatorio de pago pendiente por: *${tx.description}* ($${tx.amount.toFixed(2)}). ¿Me confirmas si ya pudiste realizar la transferencia?`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    }
 
     return (
         <DashboardLayout>
@@ -400,17 +412,50 @@ export default function FinancePage() {
                             <CardContent>
                                 <div className="space-y-2">
                                     {transactions.filter(t => t.type === 'INCOME' && t.status !== 'PAID').map((tx) => (
-                                        <div key={tx.id} className="flex items-center justify-between p-4 border rounded-xl border-orange-100 bg-orange-50/10">
+                                        <div key={tx.id} className="flex flex-col md:flex-row md:items-center justify-between p-5 border rounded-2xl border-orange-100 bg-orange-50/10 gap-4 group hover:bg-orange-50/20 transition-all">
                                             <div className="flex items-center gap-4">
-                                                <Receipt className="h-5 w-5 text-orange-500" />
+                                                <div className="p-3 bg-orange-100 rounded-xl text-orange-600">
+                                                    <Receipt className="h-6 w-6" />
+                                                </div>
                                                 <div>
-                                                    <p className="font-bold">{tx.description}</p>
-                                                    <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Vence: {tx.dueDate ? format(new Date(tx.dueDate), 'PPP') : 'Sin fecha'}</p>
+                                                    <p className="font-black text-lg">{tx.description}</p>
+                                                    <div className="flex flex-wrap gap-2 mt-1">
+                                                        <Badge variant="outline" className="text-[10px] uppercase font-bold py-0 h-5 border-orange-200 text-orange-700 bg-orange-100/50">
+                                                            Vence: {tx.dueDate ? format(new Date(tx.dueDate), 'dd MMM', { locale: es }) : 'Sin fecha'}
+                                                        </Badge>
+                                                        {tx.intentosCobro > 0 && (
+                                                            <Badge className="text-[10px] uppercase font-bold py-0 h-5 bg-blue-500 hover:bg-blue-600">
+                                                                {tx.intentosCobro} Intentos
+                                                            </Badge>
+                                                        )}
+                                                        {tx.proximoRecordatorio && tx.status !== 'PAID' && (
+                                                            <Badge variant="secondary" className="text-[10px] uppercase font-bold py-0 h-5">
+                                                                Siguiente: {format(new Date(tx.proximoRecordatorio), 'dd MMM', { locale: es })}
+                                                            </Badge>
+                                                        )}
+                                                        <Badge className={cn(
+                                                            "text-[10px] uppercase font-bold py-0 h-5 border-none",
+                                                            tx.estadoCobro === 'EN_GESTION' ? "bg-orange-500" : 
+                                                            tx.estadoCobro === 'PAGADO' ? "bg-green-500" : "bg-gray-500"
+                                                        )}>
+                                                            {tx.estadoCobro || 'PENDIENTE'}
+                                                        </Badge>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="text-right">
-                                                <p className="font-black text-xl text-orange-600">{formatCurrency(tx.amount)}</p>
-                                                <Button variant="ghost" size="sm" className="text-xs h-7">Notificar Cliente</Button>
+                                            <div className="flex items-center gap-3 self-end md:self-center">
+                                                <div className="text-right mr-2">
+                                                    <p className="font-black text-2xl text-orange-600 tracking-tighter">{formatCurrency(tx.amount)}</p>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <Button variant="outline" size="icon" className="h-10 w-10 border-orange-200 text-orange-600 hover:bg-orange-50" onClick={() => handleWhatsAppReminder(tx)}>
+                                                        <MessageCircle className="h-5 w-5" />
+                                                    </Button>
+                                                    <Button variant="default" size="sm" className="bg-orange-600 hover:bg-orange-700 font-black uppercase text-[10px] tracking-widest px-4 h-10" onClick={() => handleConfirmPayment(tx.id)}>
+                                                        <CheckCircle2 className="h-4 w-4 mr-2" />
+                                                        PAGADO
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}

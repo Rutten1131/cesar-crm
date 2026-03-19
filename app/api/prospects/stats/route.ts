@@ -1,6 +1,6 @@
 import { db, schema } from '@/lib/db';
 import { NextResponse } from 'next/server';
-import { sql, count } from 'drizzle-orm';
+import { sql, count, gte } from 'drizzle-orm';
 
 export async function GET() {
     try {
@@ -25,12 +25,11 @@ export async function GET() {
         // Contacted today (whatsappSentAt is today)
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const todayTimestamp = Math.floor(today.getTime() / 1000);
 
         const contactedTodayResult = await db
             .select({ count: count() })
             .from(schema.prospects)
-            .where(sql`${schema.prospects.whatsappSentAt} >= ${todayTimestamp}`);
+            .where(gte(schema.prospects.whatsappSentAt, today));
 
         const contactedToday = contactedTodayResult[0]?.count || 0;
 

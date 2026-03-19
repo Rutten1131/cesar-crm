@@ -319,6 +319,18 @@ export const quotations = pgTable('quotations', {
   totalAmount: doublePrecision('total_amount'),
 
   createdBy: text('created_by').default('Michael'),
+
+  // === SEGUIMIENTO AUTOMATIZADO ===
+  contactId: uuid('contact_id').references(() => contacts.id),
+  fechaPrimerContacto: timestamp('fecha_primer_contacto'),
+  proximoSeguimiento: timestamp('proximo_seguimiento'),
+  intentosRealizados: integer('intentos_realizados').default(0),
+  estadoSeguimiento: text('estado_seguimiento', {
+    enum: ['PENDIENTE', 'ENVIADO', 'EN_SEGUIMIENTO', 'RESPONDIDO', 'CERRADO']
+  }).default('PENDIENTE'),
+  numeroWhatsapp: text('numero_whatsapp'),
+  notasSeguimiento: text('notas_seguimiento'),
+
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -426,6 +438,15 @@ export const transactions = pgTable('transactions', {
   isRecurring: boolean('is_recurring').default(false),
   recurrenceRule: text('recurrence_rule'), // 'MONTHLY', 'YEARLY'
   notes: text('notes'),
+
+  // === COBRANZA AUTOMATIZADA ===
+  intentosCobro: integer('intentos_cobro').default(0),
+  proximoRecordatorio: timestamp('proximo_recordatorio'),
+  estadoCobro: text('estado_cobro', {
+    enum: ['PENDIENTE', 'EN_GESTION', 'PAGADO', 'INCOBRABLE']
+  }).default('PENDIENTE'),
+  numeroWhatsapp: text('numero_whatsapp'),
+  logCobranza: text('log_cobranza'),
 
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
@@ -853,4 +874,29 @@ export const donnaSessionTelemetry = pgTable('donna_session_telemetry', {
   iterationCount: integer('iteration_count').default(0).notNull(), // How many times it was modified
   wasSuccessful: boolean('was_successful').default(true).notNull(), // Did it end in 'closed' or 'abandoned'?
   createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+// ============================================
+// DONNA TASKS: AGENDA AND NLP SCHEDULING (PHASE 7)
+// ============================================
+export const donnaTasks = pgTable('donna_tasks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  contactId: uuid('contact_id').references(() => contacts.id, { onDelete: 'set null' }), // Optional
+  
+  title: text('title').notNull(),
+  description: text('description'),
+  
+  scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+  
+  // Reminder Flags
+  remindedMorning: boolean('reminded_morning').default(false).notNull(),
+  reminded1h: boolean('reminded_1h').default(false).notNull(),
+  reminded10m: boolean('reminded_10m').default(false).notNull(),
+
+  status: text('status', {
+    enum: ['pending', 'done', 'cancelled']
+  }).default('pending').notNull(),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

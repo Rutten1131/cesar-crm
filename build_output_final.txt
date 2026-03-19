@@ -1,0 +1,210 @@
+﻿  Ôû▓ Next.js 14.2.16
+  - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: instagram
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+­ƒôí WhatsAppService (Meta) Multimedia-Enabled Initialized
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+   Generating static pages (0/87) ...
+   Generating static pages (21/87) 
+­ƒÜÇ API Migration: Donna v2.0...
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42701',
+  message: 'column "message_timestamp" of relation "donna_chat_messages" already exists, skipping',
+  file: 'tablecmds.c',
+  line: '7471',
+  routine: 'check_for_column_name_collision'
+}
+Ô£à Column added.
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42P07',
+  message: 'relation "idx_message_timestamp" already exists, skipping',
+  file: 'index.c',
+  line: '889',
+  routine: 'index_create'
+}
+Ô£à Index created.
+   Generating static pages (43/87) 
+­ƒÜÇ [API/Chats] Messages found with platform=whatsapp: 14
+­ƒôí MessagingService Core Initialized
+­ƒöî Adapter registered: whatsapp
+­ƒöî Adapter registered: telegram
+­ƒöî Adapter registered: instagram
+   Generating static pages (65/87) 
+ Ô£ô Generating static pages (87/87)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                   Size     First Load JS
+Ôöî Ôùï /                                         143 B          87.7 kB
+Ôö£ Ôùï /_not-found                               880 B          88.5 kB
+Ôö£ ãÆ /api/ai/agent/chat                        0 B                0 B
+Ôö£ ãÆ /api/ai/reports/cortex-360                0 B                0 B
+Ôö£ ãÆ /api/alerts                               0 B                0 B
+Ôö£ ãÆ /api/alerts/[id]                          0 B                0 B
+Ôö£ ãÆ /api/auth/instagram/callback              0 B                0 B
+Ôö£ ãÆ /api/auth/signup                          0 B                0 B
+Ôö£ ãÆ /api/bot/contracts                        0 B                0 B
+Ôö£ ãÆ /api/bot/leads                            0 B                0 B
+Ôö£ ãÆ /api/bot/leads/[id]/status                0 B                0 B
+Ôö£ ãÆ /api/bot/quotations                       0 B                0 B
+Ôö£ ãÆ /api/bot/quotations/[id]/followup         0 B                0 B
+Ôö£ ãÆ /api/bot/quotations/pending-followup      0 B                0 B
+Ôö£ ãÆ /api/bot/send-document                    0 B                0 B
+Ôö£ ãÆ /api/bot/transactions/[id]/collection     0 B                0 B
+Ôö£ ãÆ /api/bot/transactions/pending-collection  0 B                0 B
+Ôö£ ãÆ /api/clients                              0 B                0 B
+Ôö£ ãÆ /api/clients/[id]                         0 B                0 B
+Ôö£ ãÆ /api/clients/search                       0 B                0 B
+Ôö£ ãÆ /api/coach/detect-alerts                  0 B                0 B
+Ôö£ ãÆ /api/coach/extract-profile                0 B                0 B
+Ôö£ ãÆ /api/coach/prepare                        0 B                0 B
+Ôö£ ãÆ /api/contract-templates                   0 B                0 B
+Ôö£ ãÆ /api/contracts                            0 B                0 B
+Ôö£ ãÆ /api/contracts/[id]                       0 B                0 B
+Ôö£ ãÆ /api/conversations                        0 B                0 B
+Ôö£ ãÆ /api/conversations/[id]/channels          0 B                0 B
+Ôö£ ãÆ /api/conversations/[id]/history           0 B                0 B
+Ôö£ ãÆ /api/conversations/[id]/link              0 B                0 B
+Ôö£ ãÆ /api/conversations/[id]/read              0 B                0 B
+Ôö£ ãÆ /api/conversations/[id]/send              0 B                0 B
+Ôö£ ãÆ /api/conversations/kanban                 0 B                0 B
+Ôö£ ãÆ /api/conversations/media/[mediaId]        0 B                0 B
+Ôö£ ãÆ /api/cotizaciones/seguimiento             0 B                0 B
+Ôö£ ãÆ /api/cron/collection-reminder             0 B                0 B
+Ôö£ ãÆ /api/cron/notifications                   0 B                0 B
+Ôö£ ãÆ /api/cron/quotation-followup              0 B                0 B
+Ôö£ ãÆ /api/dashboard/stats                      0 B                0 B
+Ôö£ ãÆ /api/discovery                            0 B                0 B
+Ôö£ ãÆ /api/discovery/[id]                       0 B                0 B
+Ôö£ ãÆ /api/discovery/[id]/convert               0 B                0 B
+Ôö£ ãÆ /api/discovery/[id]/research              0 B                0 B
+Ôö£ ãÆ /api/discovery/facets                     0 B                0 B
+Ôö£ ãÆ /api/donna/agent/[id]                     0 B                0 B
+Ôö£ ãÆ /api/donna/briefing/[id]                  0 B                0 B
+Ôö£ Ôùï /api/donna/commitments/active             0 B                0 B
+Ôö£ ãÆ /api/donna/extract                        0 B                0 B
+Ôö£ ãÆ /api/donna/missions                       0 B                0 B
+Ôö£ Ôùï /api/donna/missions/count                 0 B                0 B
+Ôö£ ãÆ /api/donna/reminder                       0 B                0 B
+Ôö£ ãÆ /api/donna/stats/macro                    0 B                0 B
+Ôö£ ãÆ /api/email/send                           0 B                0 B
+Ôö£ ãÆ /api/events                               0 B                0 B
+Ôö£ ãÆ /api/finance/analytics                    0 B                0 B
+Ôö£ ãÆ /api/finance/forecast                     0 B                0 B
+Ôö£ ãÆ /api/finance/metrics                      0 B                0 B
+Ôö£ ãÆ /api/finance/personal                     0 B                0 B
+Ôö£ ãÆ /api/finance/personal/[id]                0 B                0 B
+Ôö£ ãÆ /api/finance/sales-pro                    0 B                0 B
+Ôö£ ãÆ /api/finance/transactions                 0 B                0 B
+Ôö£ ãÆ /api/finance/transactions/[id]            0 B                0 B
+Ôö£ Ôùï /api/health                               0 B                0 B
+Ôö£ ãÆ /api/interactions                         0 B                0 B
+Ôö£ ãÆ /api/leads                                0 B                0 B
+Ôö£ ãÆ /api/leads/[id]                           0 B                0 B
+Ôö£ ãÆ /api/leads/[id]/convert                   0 B                0 B
+Ôö£ ãÆ /api/leads/capture                        0 B                0 B
+Ôö£ ãÆ /api/leads/count-new                      0 B                0 B
+Ôö£ Ôùï /api/migrate/v2                           0 B                0 B
+Ôö£ ãÆ /api/products/search                      0 B                0 B
+Ôö£ ãÆ /api/prospects                            0 B                0 B
+Ôö£ Ôùï /api/prospects/export-whatsapp            0 B                0 B
+Ôö£ ãÆ /api/prospects/import-whatsapp            0 B                0 B
+Ôö£ Ôùï /api/prospects/stats                      0 B                0 B
+Ôö£ ãÆ /api/quotations/generate                  0 B                0 B
+Ôö£ ãÆ /api/quotations/generate-description      0 B                0 B
+Ôö£ ãÆ /api/quotations/generate-full-quotation   0 B                0 B
+Ôö£ ãÆ /api/quotations/test-llm                  0 B                0 B
+Ôö£ ãÆ /api/settings                             0 B                0 B
+Ôö£ ãÆ /api/tasks                                0 B                0 B
+Ôö£ ãÆ /api/tasks/[id]                           0 B                0 B
+Ôö£ ãÆ /api/telegram/test                        0 B                0 B
+Ôö£ ãÆ /api/telegram/webhook                     0 B                0 B
+Ôö£ ãÆ /api/test-cortex                          0 B                0 B
+Ôö£ ãÆ /api/test-create-contact                  0 B                0 B
+Ôö£ ãÆ /api/test-sample-pdf                      0 B                0 B
+Ôö£ ãÆ /api/trainer/analyze                      0 B                0 B
+Ôö£ ãÆ /api/trainer/proposal                     0 B                0 B
+Ôö£ ãÆ /api/transcribe                           0 B                0 B
+Ôö£ ãÆ /api/webhooks/instagram                   0 B                0 B
+Ôö£ ãÆ /api/webhooks/whatsapp                    0 B                0 B
+Ôö£ Ôùï /api/whatsapp/chats                       0 B                0 B
+Ôö£ ãÆ /api/whatsapp/chats/[id]                  0 B                0 B
+Ôö£ ãÆ /api/whatsapp/chats/[id]/details          0 B                0 B
+Ôö£ ãÆ /api/whatsapp/media/[id]                  0 B                0 B
+Ôö£ ãÆ /api/whatsapp/media/upload                0 B                0 B
+Ôö£ ãÆ /api/whatsapp/send                        0 B                0 B
+Ôö£ ãÆ /api/whatsapp/test-history                0 B                0 B
+Ôö£ Ôùï /api/whatsapp/unread                      0 B                0 B
+Ôö£ Ôùï /auth/forgot-password                     2.75 kB         158 kB
+Ôö£ Ôùï /auth/login                               2.65 kB         158 kB
+Ôö£ Ôùï /auth/signup                              3.4 kB          103 kB
+Ôö£ Ôùï /auth/update-password                     2.67 kB         158 kB
+Ôö£ Ôùï /catalogo                                 8.73 kB         117 kB
+Ôö£ Ôùï /clients                                  4.33 kB         165 kB
+Ôö£ ãÆ /clients/[id]                             10.5 kB         226 kB
+Ôö£ Ôùï /comunicaciones                           20 kB           177 kB
+Ôö£ Ôùï /contratos                                6.24 kB         107 kB
+Ôö£ ãÆ /contratos/[id]                           9.37 kB         611 kB
+Ôö£ Ôùï /contratos/nuevo                          9.11 kB         153 kB
+Ôö£ Ôùï /cotizaciones                             6.48 kB         652 kB
+Ôö£ Ôùï /cotizaciones/seguimiento                 4.79 kB         154 kB
+Ôö£ Ôùï /dashboard                                9.46 kB         292 kB
+Ôö£ Ôùï /discovery                                8.73 kB         166 kB
+Ôö£ Ôùï /donna                                    5 kB            154 kB
+Ôö£ Ôùï /events                                   4.75 kB         157 kB
+Ôö£ Ôùï /finance                                  29.1 kB         321 kB
+Ôö£ Ôùï /leads                                    14.1 kB         171 kB
+Ôö£ ãÆ /leads/[id]                               13.1 kB         711 kB
+Ôö£ Ôùï /legal                                    2.49 kB        96.8 kB
+Ôö£ Ôùï /ops                                      3.82 kB         160 kB
+Ôö£ Ôùï /pruebasteegram                           11 kB           109 kB
+Ôö£ ãÆ /recorridos                               1.73 kB         162 kB
+Ôö£ Ôùï /settings                                 15.9 kB         117 kB
+Ôö£ Ôùï /settings/instagram                       7.04 kB         101 kB
+Ôö£ Ôùï /tasks                                    6.6 kB          166 kB
+Ôö£ Ôùï /trainer                                  23.7 kB         672 kB
+Ôöö Ôùï /whatsapp                                 15.9 kB         149 kB
++ First Load JS shared by all                 87.6 kB
+  Ôö£ chunks/2117-6e108488077634f4.js           31.8 kB
+  Ôö£ chunks/fd9d1056-0256463763086754.js       53.6 kB
+  Ôöö other shared chunks (total)               2.18 kB
+
+
+ãÆ Middleware                                  73.2 kB
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

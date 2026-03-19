@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { FileText, Plus, Save, BookOpen, Loader2, Sparkles, Search, Check, ChevronsUpDown, Eye, Download, Mail, MessageCircle } from "lucide-react"
+import { FileText, Plus, Save, BookOpen, Loader2, Sparkles, Search, Check, ChevronsUpDown, Eye, Download, Mail, MessageCircle, TrendingUp } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
@@ -17,6 +17,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription, DialogHeader, DialogFooter } from "@/components/ui/dialog"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 import { QuotationDocument } from "@/components/pdf/QuotationDocument"
 import { sendQuotationEmail } from "@/app/actions/email-actions"
 
@@ -293,9 +294,16 @@ export default function CotizacionesPage() {
   return (
     <DashboardLayout>
       <div className="p-4 sm:p-6 md:p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Constructor de Cotizaciones</h1>
-          <p className="text-muted-foreground">Crea cotizaciones personalizadas usando plantillas y asistencia de IA.</p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Constructor de Cotizaciones</h1>
+            <p className="text-muted-foreground">Crea cotizaciones personalizadas usando plantillas y asistencia de IA.</p>
+          </div>
+          <Link href="/cotizaciones/seguimiento">
+            <Button variant="outline" className="gap-2 border-primary text-primary hover:bg-primary/10">
+              <TrendingUp className="h-4 w-4" /> Ver Seguimientos
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -560,8 +568,8 @@ export default function CotizacionesPage() {
                         <PDFViewer width="100%" height="100%" className="border-none">
                           <QuotationDocument
                             content={quotationContent}
-                            logoUrl={window.location.origin + "/logo-membrete.png"}
-                            footerUrl={window.location.origin + "/pie-pagina.png"}
+                            logoUrl={(typeof window !== 'undefined' ? window.location.origin : '') + "/logo-membrete.png"}
+                            footerUrl={(typeof window !== 'undefined' ? window.location.origin : '') + "/pie-pagina.png"}
                           />
                         </PDFViewer>
                       )}
