@@ -18,13 +18,11 @@ export class EvolutionWhatsAppService {
 
         const payload = {
             number: cleanNumber,
+            text: text,
             options: {
                 delay: 1200,
                 presence: "composing",
                 linkPreview: true
-            },
-            textMessage: {
-                text: text
             }
         };
 
