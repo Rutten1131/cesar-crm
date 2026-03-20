@@ -39,7 +39,11 @@ export class EvolutionWhatsAppService {
         } catch (error: any) {
             const errData = error.response?.data || error.message;
             console.error('❌ [EvolutionAPI] sendMessage Error:', JSON.stringify(errData));
-            return { success: false, error: typeof errData === 'string' ? errData : JSON.stringify(errData) };
+            return { 
+                success: false, 
+                error: typeof errData === 'string' ? errData : JSON.stringify(errData),
+                debug_payload: payload // Include payload for debugging
+            };
         }
     }
 
