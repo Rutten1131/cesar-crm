@@ -37,9 +37,18 @@ export async function GET(req: Request) {
         const quotesCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'quotations'`);
         const transCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'transactions'`);
 
+        // Test Query
+        let testResult = null;
+        try {
+            testResult = await db.execute(sql`SELECT id FROM quotations WHERE estado_seguimiento IN ('PENDIENTE', 'ENVIADO', 'EN_SEGUIMIENTO') LIMIT 1`);
+        } catch (e: any) {
+            testResult = { error: e.message, detail: e.detail, code: e.code };
+        }
+
         return NextResponse.json({ 
             success: true, 
             message: 'Schema updated successfully',
+            test: testResult,
             verification: {
                 quotations: (quotesCols as any).map((r: any) => r.column_name),
                 transactions: (transCols as any).map((r: any) => r.column_name)
