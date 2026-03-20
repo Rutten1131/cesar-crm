@@ -36,19 +36,19 @@ export async function GET(req: Request) {
         // Verification query
         const quotesCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'quotations'`);
         const transCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'transactions'`);
+        const leadsCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'leads'`);
+        const contactsCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'contacts'`);
         const tables = await db.execute(sql`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'`);
-        
-        // Data Inspection
-        const samples = await db.execute(sql`SELECT id, title, status, estado_seguimiento, intentos_realizados FROM quotations LIMIT 5`);
 
         return NextResponse.json({ 
             success: true, 
-            message: 'Schema updated successfully',
+            message: 'Schema audited',
             tables: (tables as any).map((r: any) => r.table_name),
-            samples: samples,
             verification: {
                 quotations: (quotesCols as any).map((r: any) => r.column_name),
-                transactions: (transCols as any).map((r: any) => r.column_name)
+                transactions: (transCols as any).map((r: any) => r.column_name),
+                leads: (leadsCols as any).map((r: any) => r.column_name),
+                contacts: (contactsCols as any).map((r: any) => r.column_name)
             }
         });
     } catch (error: any) {
