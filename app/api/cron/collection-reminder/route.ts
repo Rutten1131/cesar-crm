@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import * as schema from '@/lib/db/schema';
-import { whatsappService } from '@/lib/whatsapp/WhatsAppService';
+import { WhatsAppAdapter } from '@/lib/messaging/adapters/WhatsAppAdapter';
 import { getCollectionTemplate } from '@/lib/templates/collection-templates';
 import { and, lte, inArray, or, isNull, eq, notInArray } from 'drizzle-orm';
 import { telegramService } from '@/lib/telegram/TelegramService';
@@ -93,7 +93,8 @@ export async function GET(req: Request) {
             const message = getCollectionTemplate(attempt, cutomerName, t.description, t.amount);
 
             // Send via WhatsApp
-            const sendResult = await whatsappService.sendMessage(phone, message);
+            const adapter = new WhatsAppAdapter();
+            const sendResult = await adapter.sendMessage(phone, message);
 
             if (sendResult.success) {
                 let nextDelayDays = [3-1, 7-3, 14-7, 21-14][attempt - 1] || 7;

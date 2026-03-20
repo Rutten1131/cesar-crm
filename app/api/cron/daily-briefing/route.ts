@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import * as schema from '@/lib/db/schema';
-import { whatsappService } from '@/lib/whatsapp/WhatsAppService';
+import { WhatsAppAdapter } from '@/lib/messaging/adapters/WhatsAppAdapter';
 import { and, eq, gte, lt, asc } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
@@ -68,7 +68,8 @@ export async function GET(req: Request) {
         // Send via WhatsApp
         const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593984368560'; // Cesar's default
         
-        const sendResult = await whatsappService.sendMessage(targetNumber, messageBody);
+        const adapter = new WhatsAppAdapter();
+        const sendResult = await adapter.sendMessage(targetNumber, messageBody);
 
         if (sendResult.success) {
             // Mark tasks as remindedMorning = true

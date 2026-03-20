@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import * as schema from '@/lib/db/schema';
-import { whatsappService } from '@/lib/whatsapp/WhatsAppService';
+import { WhatsAppAdapter } from '@/lib/messaging/adapters/WhatsAppAdapter';
 import { and, eq, gte, lte } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
@@ -41,7 +41,8 @@ export async function GET(req: Request) {
             
             const messageBody = `⏳ *Recordatorio (Falta 1 hora)*\nCésar, tienes el siguiente evento agendado para las ${task.scheduledAt.toLocaleTimeString('es-ES', { timeZone: 'America/Guayaquil', hour: '2-digit', minute: '2-digit' })}:\n\n*${task.title}*\n${task.description ? '_' + task.description + '_' : ''}`;
             
-            const sendResult = await whatsappService.sendMessage(targetNumber, messageBody);
+            const adapter = new WhatsAppAdapter();
+            const sendResult = await adapter.sendMessage(targetNumber, messageBody);
             
             if (sendResult.success) {
                 await db.update(schema.donnaTasks)
@@ -68,7 +69,8 @@ export async function GET(req: Request) {
         for (const task of tenMinsTasks) {
             const messageBody = `🚀 *¡ATENCIÓN! (Faltan 10 min)*\nCésar, tu evento está a punto de comenzar:\n\n*${task.title}*`;
             
-            const sendResult = await whatsappService.sendMessage(targetNumber, messageBody);
+            const adapter = new WhatsAppAdapter();
+            const sendResult = await adapter.sendMessage(targetNumber, messageBody);
             
             if (sendResult.success) {
                 await db.update(schema.donnaTasks)

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { whatsappService } from '@/lib/whatsapp/WhatsAppService';
+import { WhatsAppAdapter } from '@/lib/messaging/adapters/WhatsAppAdapter';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +15,8 @@ export async function GET(req: Request) {
         const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593984368560';
         const messageBody = `⛰️ *Recordatorio Semanal* ⛰️\nCésar, recuerda anunciar la finca *"Aroma de Montaña"* hoy. ¡Mucho éxito!`;
         
-        const sendResult = await whatsappService.sendMessage(targetNumber, messageBody);
+        const adapter = new WhatsAppAdapter();
+        const sendResult = await adapter.sendMessage(targetNumber, messageBody);
 
         if (sendResult.success) {
             return NextResponse.json({ success: true, message: 'Monday reminder sent' });

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import * as schema from '@/lib/db/schema';
-import { whatsappService } from '@/lib/whatsapp/WhatsAppService';
+import { WhatsAppAdapter } from '@/lib/messaging/adapters/WhatsAppAdapter';
 import { getFollowupTemplate } from '@/lib/templates/followup-templates';
 import { and, lte, inArray, or, isNull, eq } from 'drizzle-orm';
 // Removed invalid Donna import
@@ -58,7 +58,8 @@ export async function GET(req: Request) {
             const message = getFollowupTemplate(attempt, cutomerName, q.title);
 
             // Send via WhatsApp
-            const sendResult = await whatsappService.sendMessage(phone, message);
+            const adapter = new WhatsAppAdapter();
+            const sendResult = await adapter.sendMessage(phone, message);
 
             if (sendResult.success) {
                 // Calculate next follow up date based on attempt
