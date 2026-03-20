@@ -57,9 +57,13 @@ export async function GET(req: Request) {
             const attempt = (q.intentosRealizados || 0) + 1;
             const message = getFollowupTemplate(attempt, cutomerName, q.title);
 
-            // Send via WhatsApp
+            // Format message for César to review and forward
+            const adminNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593963410409';
+            const supervisorMessage = `🤖 *[Donna: Sugerencia de Seguimiento]*\nPara: *${cutomerName}* (${phone || 'Sin número'})\n---\n${message}`;
+
+            // Send via WhatsApp to César
             const adapter = new WhatsAppAdapter();
-            const sendResult = await adapter.sendMessage(phone, message);
+            const sendResult = await adapter.sendMessage(adminNumber, supervisorMessage);
 
             if (sendResult.success) {
                 // Calculate next follow up date based on attempt

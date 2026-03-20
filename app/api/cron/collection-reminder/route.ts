@@ -92,9 +92,13 @@ export async function GET(req: Request) {
             // Just send next sequential message if we passed the required wait
             const message = getCollectionTemplate(attempt, cutomerName, t.description, t.amount);
 
-            // Send via WhatsApp
+            // Format message for César to review and forward
+            const adminNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593963410409';
+            const supervisorMessage = `🤖 *[Donna: Recordatorio de Cobranza]*\nPara: *${cutomerName}* (${phone || 'Sin número'})\n---\n${message}`;
+
+            // Send via WhatsApp to César
             const adapter = new WhatsAppAdapter();
-            const sendResult = await adapter.sendMessage(phone, message);
+            const sendResult = await adapter.sendMessage(adminNumber, supervisorMessage);
 
             if (sendResult.success) {
                 let nextDelayDays = [3-1, 7-3, 14-7, 21-14][attempt - 1] || 7;
