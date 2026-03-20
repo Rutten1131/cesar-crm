@@ -37,11 +37,15 @@ export async function GET(req: Request) {
         const quotesCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'quotations'`);
         const transCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'transactions'`);
         const tables = await db.execute(sql`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'`);
+        
+        // Data Inspection
+        const samples = await db.execute(sql`SELECT id, title, status, estado_seguimiento, intentos_realizados FROM quotations LIMIT 5`);
 
         return NextResponse.json({ 
             success: true, 
             message: 'Schema updated successfully',
             tables: (tables as any).map((r: any) => r.table_name),
+            samples: samples,
             verification: {
                 quotations: (quotesCols as any).map((r: any) => r.column_name),
                 transactions: (transCols as any).map((r: any) => r.column_name)
