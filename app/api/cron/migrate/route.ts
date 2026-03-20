@@ -33,7 +33,18 @@ export async function GET(req: Request) {
 
         console.log('--- DATA MIGRATION SUCCESS ---');
 
-        return NextResponse.json({ success: true, message: 'Schema updated successfully' });
+        // Verification query
+        const quotesCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'quotations'`);
+        const transCols = await db.execute(sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'transactions'`);
+
+        return NextResponse.json({ 
+            success: true, 
+            message: 'Schema updated successfully',
+            verification: {
+                quotations: (quotesCols as any).map((r: any) => r.column_name),
+                transactions: (transCols as any).map((r: any) => r.column_name)
+            }
+        });
     } catch (error: any) {
         console.error('❌ Migration Error:', error);
         return NextResponse.json({ success: false, error: error.message }, { status: 500 });
