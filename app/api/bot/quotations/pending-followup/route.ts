@@ -41,11 +41,11 @@ export async function GET(request: Request) {
             let contactInfo = null;
             if (q.leadId) {
                 contactInfo = await db.query.leads.findFirst({
-                    where: (leads, { eq }) => eq(leads.id, q.leadId)
+                    where: (leads, { eq }) => eq(leads.id, q.leadId!)
                 });
             } else if (q.contactId) {
                 contactInfo = await db.query.contacts.findFirst({
-                    where: (contacts, { eq }) => eq(contacts.id, q.contactId)
+                    where: (contacts, { eq }) => eq(contacts.id, q.contactId!)
                 });
             }
 

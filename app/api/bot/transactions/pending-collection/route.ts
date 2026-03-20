@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import * as schema from '@/lib/db/schema';
 import { verifyBotAuth } from '@/lib/bot-auth';
-import { and, lte, inArray, eq, or, notInArray } from 'drizzle-orm';
+import { and, lte, inArray, eq, or, notInArray, isNull } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,11 +44,11 @@ export async function GET(request: Request) {
             let contactInfo = null;
             if (t.clientId) {
                 contactInfo = await db.query.clients.findFirst({
-                    where: (clients, { eq }) => eq(clients.id, t.clientId)
+                    where: (clients, { eq }) => eq(clients.id, t.clientId!)
                 });
             } else if (t.leadId) {
                 contactInfo = await db.query.leads.findFirst({
-                    where: (leads, { eq }) => eq(leads.id, t.leadId)
+                    where: (leads, { eq }) => eq(leads.id, t.leadId!)
                 });
             }
 

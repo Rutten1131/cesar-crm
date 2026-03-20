@@ -78,4 +78,9 @@ export class InstagramAdapter implements IMessagingAdapter {
         // IDs are usually strings like "1234567890"
         return typeof contact === 'string' && contact.length > 5;
     }
+
+    async sendDocument(to: string, buffer: Buffer, filename: string, caption?: string, metadata?: any): Promise<{ success: boolean; data?: any; error?: string }> {
+        console.warn('📸 InstagramAdapter: sendDocument not implemented yet');
+        return { success: false, error: 'Instagram sendDocument not supported yet' };
+    }
 }

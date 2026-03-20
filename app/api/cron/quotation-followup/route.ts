@@ -80,7 +80,7 @@ export async function GET(req: Request) {
                 await db.update(schema.quotations)
                     .set({
                         intentosRealizados: attempt,
-                        estadoSeguimiento: attempt === 1 ? 'ENVIADO' : nextStatus,
+                        estadoSeguimiento: (attempt === 1 ? 'ENVIADO' : nextStatus) as any,
                         proximoSeguimiento: nextDate,
                         fechaPrimerContacto: attempt === 1 ? new Date() : q.fechaPrimerContacto,
                         notasSeguimiento: (q.notasSeguimiento || '') + `\n[${new Date().toLocaleString('es-EC')}] Intento ${attempt} enviado.`,
