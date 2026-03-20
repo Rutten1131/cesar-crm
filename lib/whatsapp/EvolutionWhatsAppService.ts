@@ -3,9 +3,9 @@ import axios from 'axios';
 export class EvolutionWhatsAppService {
     private getCredentials() {
         return {
-            apiUrl: process.env.EVOLUTION_API_URL || '',
-            apiKey: process.env.EVOLUTION_API_KEY || '',
-            instance: process.env.EVOLUTION_INSTANCE || ''
+            apiUrl: process.env.EVOLUTION_API_URL || 'http://129.153.116.213:8080',
+            apiKey: process.env.EVOLUTION_API_KEY || '42a447c1-3d74-4b52-9571-042c174f7621',
+            instance: process.env.EVOLUTION_INSTANCE || 'Automatizotunegocio'
         };
     }
 
