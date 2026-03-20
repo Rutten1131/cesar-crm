@@ -12,7 +12,7 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593984368560';
+        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593963410409';
         const messageBody = `⛰️ *Recordatorio Semanal* ⛰️\nCésar, recuerda anunciar la finca *"Aroma de Montaña"* hoy. ¡Mucho éxito!`;
         
         const adapter = new WhatsAppAdapter();

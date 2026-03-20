@@ -17,7 +17,7 @@ export async function GET(req: Request) {
         }
 
         const now = new Date();
-        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593984368560';
+        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593963410409';
         let sentCount = 0;
 
         // ==========================================

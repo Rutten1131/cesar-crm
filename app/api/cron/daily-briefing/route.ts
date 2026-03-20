@@ -66,7 +66,7 @@ export async function GET(req: Request) {
         messageBody += `¡Que tengas un excelente día de ventas! 🚀`;
 
         // Send via WhatsApp
-        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593984368560'; // Cesar's default
+        const targetNumber = process.env.WHATSAPP_ADMIN_NUMBER || '593963410409'; // Cesar's real number from .env.local fallback
         
         const adapter = new WhatsAppAdapter();
         const sendResult = await adapter.sendMessage(targetNumber, messageBody);
