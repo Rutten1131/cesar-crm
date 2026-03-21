@@ -17,6 +17,6 @@ export const config = {
      * - api/cron routes (Background tasks)
      * - health check
      */
-    "/((?!_next/static|_next/image|favicon.ico|api/bot|api/cron|api/telegram/webhook|api/whatsapp/webhook|api/health|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/bot|api/cron|api/telegram|api/whatsapp|api/health|api/webhooks|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 }

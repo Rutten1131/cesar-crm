@@ -46,7 +46,10 @@ export async function updateSession(request: NextRequest) {
     !isPublicApi &&
     !isCarnavalPage &&
     !isCarnavalApi &&
-    !isVcfDownload
+    !isVcfDownload &&
+    !request.nextUrl.pathname.startsWith('/api/bot') &&
+    !request.nextUrl.pathname.startsWith('/api/cron') &&
+    !request.nextUrl.pathname.startsWith('/api/health')
   ) {
     if (isApiRoute) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
