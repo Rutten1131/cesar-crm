@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { contacts, events, interactions, tasks, contactChannels, products, leads, quotations } from '@/lib/db/schema';
-import { conversationStates, discoveryLeads, donnaChatMessages } from '../../db/schema';
+import { conversationStates, discoveryLeads, donnaChatMessages, donnaTasks } from '../../db/schema';
 import { messagingService } from '@/lib/messaging/MessagingService';
 import { eq, desc, and, gte, lte, sql } from 'drizzle-orm';
 import fs from 'fs';
@@ -220,6 +220,8 @@ export class CortexRouterService {
                 console.error('❌ [PdfIntelligence] Error procesando PDF:', err);
             }
         }
+
+        // 🎙️ AUDIO/VOICE TRANSCRIPTION (Phase 8) - Removed because message_worker.ts already handles it.
 
         if (!input.skipSave) {
             await this.saveMessage(input.chatId || 'system', input.source === 'cesar' ? 'user' : 'user', processedText, platform);
@@ -441,8 +443,29 @@ Estructura:
                     await internalNotificationService.notifyCesar(confirmation, replyContext);
                 }
 
-                // TODO: Integrate with GoogleCalendarService
                 console.log(`📅 [ACTION] Scheduling event:`, parsed.evento);
+                
+                try {
+                    // Parse YYYY-MM-DD and HH:MM
+                    const [year, month, day] = parsed.evento.fecha.split('-').map(Number);
+                    const [hours, minutes] = parsed.evento.hora.split(':').map(Number);
+                    
+                    // Construct ISO 8601 string assuming Ecuador Time (UTC-5)
+                    const isoDateStr = `${String(year).padStart(4, '0')}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00-05:00`;
+                    const scheduledDate = new Date(isoDateStr);
+
+                    await db.insert(donnaTasks).values({
+                        title: parsed.evento.titulo,
+                        description: parsed.evento.descripcion || 'Creado por Donna vía WhatsApp',
+                        scheduledAt: scheduledDate,
+                        contactId: contactId,
+                        status: 'pending'
+                    });
+                    console.log(`✅ [DB] Tarea guardada en donna_tasks para: ${isoDateStr}`);
+                } catch (taskErr) {
+                    console.error('❌ [ACTION] Error saving task:', taskErr);
+                }
+
                 return { status: 'ready', intent: intent, data: parsed.evento };
             }
 
